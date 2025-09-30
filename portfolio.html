@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+      color: #f5f5f5;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    /* Navbar */
+    header {
+      background: rgba(17, 17, 17, 0.95);
+      padding: 15px 50px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ff4b2b;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: #ff4b2b;
+      transform: translateY(-2px);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 6px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 28px;
+      height: 3px;
+      background: #fff;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* Hero */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 140px 80px;
+      min-height: 100vh;
+      gap: 60px;
+      background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+    }
+
+    .hero-text {
+      max-width: 600px;
+      animation: fadeIn 1s ease-in;
+    }
+
+    .hero-text h1 {
+      font-size: 52px;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .hero-text h2 {
+      font-size: 28px;
+      margin: 15px 0;
+      color: #bbb;
+    }
+
+    .highlight {
+      color: #ff4b2b;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, #ff4b2b, #ff6f61);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-img {
+      position: relative;
+    }
+
+    .hero-img img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 3px solid #ff4b2b;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+      transition: transform 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-img img:hover {
+      transform: scale(1.08);
+    }
+
+    /* Glow Effect */
+    .hero-img::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(255,75,43,0.5) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      z-index: 1;
+      filter: blur(40px);
+    }
+
+    /* Sections */
+    section {
+      padding: 100px 50px;
+    }
+
+    section h2 {
+      font-size: 30px;
+      margin-bottom: 25px;
+      text-align: center;
+      color: #ff4b2b;
+      position: relative;
+    }
+
+    section h2::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: #ff4b2b;
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    .card-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
+    }
+
+    .card {
+      background: rgba(26, 26, 26, 0.8);
+      border: 1px solid rgba(255, 75, 43, 0.6);
+      border-radius: 15px;
+      width: 220px;
+      text-align: center;
+      padding: 18px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.7);
+    }
+
+    .card-img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .card-info {
+      margin-top: 12px;
+      font-size: 15px;
+    }
+
+    /* Contact */
+    .contact {
+      text-align: center;
+    }
+
+    .contact p {
+      margin: 5px 0;
+      font-size: 16px;
+    }
+
+    /* Footer */
+    footer {
+      background: #111;
+      text-align: center;
+      padding: 18px;
+      margin-top: 30px;
+      font-size: 14px;
+      color: #bbb;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive */
+    @media(max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 100px 20px;
+        gap: 40px;
+      }
+
+      .hero-img img {
+        margin-top: 20px;
+        width: 220px;
+        height: 220px;
+      }
+
+      .hero-img::before {
+        width: 280px;
+        height: 280px;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #111;
+        position: absolute;
+        top: 70px;
+        right: 40px;
+        padding: 18px;
+        border-radius: 10px;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+ 
+  <header>
+    <nav>
+      <div class="logo">ITEC55</div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#seatwork">Seatwork</a></li>
+        <li><a href="#quizzes">Quizzes</a></li>
+        <li><a href="#lab">Lab Activities</a></li>
+        <li><a href="#exam">Exam</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-text">
+      <h1>Hey, I'm <span class="highlight">Tiffany</span></h1>
+      <h2>BSIT 2A</h2>
+      <p>2nd Year BSIT student passionate about technology and coding.</p>
+      <a href="#about" class="btn">See More</a>
+    </div>
+    <div class="hero-img">
+      <img src="picture.jpg" alt="Profile Picture">
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <h2>About Me</h2>
+    <p style="text-align:center; max-width:800px; margin:auto; font-size:16px;">
+      Hello! I’m Tiffany Mae C Sanchez, currently a BSIT 2A student. I enjoy spending my free time gaming, drawing floorplans, listening to music, reading Wattpad stories, or watching movies. I’d describe myself as hardworking, friendly, and family-oriented, with a lot of patience when it comes to challenges. My dream is to finish my studies and become a web developer who can create meaningful and creative projects.
+    </p>
+  </section>
+
+  <section id="seatwork" class="seatwork">
+    <h2>Seatwork</h2>
+    <div class="card-container">
+      <div class="card">
+        <img src="comsoon.jpg" alt="Coming Soon" class="card-img">
+        <div class="card-info">
+          <p><strong>Seatwork 1</strong></p>
+          <p>Date: </p>
+          <p>Score: </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="quizzes" class="quizzes">
+    <h2>Quizzes</h2>
+    <div class="card-container">
+      <div class="card">
+        <img src="comsoon.jpg" alt="Coming Soon" class="card-img">
+        <div class="card-info">
+          <p><strong>Quiz 1</strong></p>
+          <p>Date: </p>
+          <p>Score: </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lab" class="lab">
+    <h2>Lab Activities</h2>
+    <div class="card-container">
+      <div class="card">
+        <img src="comsoon.jpg" alt="Coming Soon" class="card-img">
+        <div class="card-info">
+          <p><strong>Lab Activity 1</strong></p>
+          <p>Date: </p>
+          <p>Score: </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="exam" class="exam">
+    <h2>Exam</h2>
+    <div class="card-container">
+      <div class="card">
+        <img src="comsoon.jpg" alt="Coming Soon" class="card-img">
+        <div class="card-info">
+          <p><strong>Midterm Exam</strong></p>
+          <p>Date: </p>
+          <p>Score: </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Contact Me</h2>
+    <p>Email: <a href="mailto:tiffanymae.sanchez@cvsu.edu.ph" style="color:#ff4b2b;">tiffanymae.sanchez@cvsu.edu.ph</a></p>
+    <p>Facebook: Tiffany Mae Sanchez</p>
+  </section>
+
+  <footer>
+    <p>© 2025 Tiffany Mae C Sanchez | Portfolio</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.querySelector(".nav-links").classList.toggle("show");
+    }
+  </script>
+</body>
+</html>
